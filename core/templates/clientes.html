@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+     <a class="btn btn-primary text-aling-center" href="{% url 'produtos_page' %}">Produtos</a>
+     <a class="btn btn-dark text-aling-center" href="{% url 'pedidos_page' %}">Pedidos</a>
+     <div class="row">
+         <h1>Clientes</h1>
+         <table class="table table-striped">
+             <thead>
+                <tr>
+                   <th scope="col">#</th>
+                   <th scope="col">Nome</th>
+                   <th scope="col">Ação</th>
+                </tr>
+             </thead>
+             <tbody>
+                {% for cliente in clientes %}
+                  <tr>
+                      <td>{{ cliente.id }}</td>
+                      <td>{{ cliente.nome }}</td>
+                      <td>
+                          <a class="btn btn-warning" href="{% url 'update_cliente' cliente.pk %}">Editar</a>
+                          <a class="btn btn-danger" href="{% url 'delete_cliente' cliente.pk %}">Deletar</a>
+                      </td>
+                  </tr>
+                {% endfor %}
+             </tbody>
+         </table>
+         <a class="btn btn-info text-aling-center btn-lg" href="{% url 'add_cliente' %}">Criar</a>
+     </div>
+{% endblock %}

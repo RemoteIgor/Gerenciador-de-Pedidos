@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load mathfilters %}
+     <a class="btn btn-primary text-aling-center" href="{% url 'clientes_page' %}">Clientes</a>
+     <a class="btn btn-dark text-aling-center" href="{% url 'produtos_page' %}">Produtos</a>
+     <div class="row">
+         <h1>Pedidos</h1>
+         <table class="table table-striped">
+             <thead>
+                <tr>
+                   <th scope="col">#</th>
+                   <th scope="col">Pedido</th>
+                   <th scope="col">Cliente</th>
+                    <th scope="col">Produto</th>
+                    <th scope="col">Preço</th>
+                    <th scope="col">Quantidade</th>
+                    <th scope="col">Rentabilidade</th>
+                </tr>
+             </thead>
+             <tbody>
+                {% for pedido in pedidos %}
+                  <tr>
+                      <td>{{ pedido.id }}</td>
+                      <td>{{ pedido.nome }}</td>
+                      <td> {{ pedido.cliente}}</td>
+                      <td> {{ pedido.produto.nome}}</td>
+                      <td> {{ pedido.preco}}</td>
+                      <td> {{ pedido.quantidade}}</td>
+                      <td>
+                           {% if pedido.preco > pedido.produto.preco %}
+                               Ótima
+                               <!--{{ pedido.produto.preco}}-->
+                           {% endif %}
+                           {% if pedido.preco >= pedido.produto.preco|mul:0.9 and  pedido.preco < pedido.produto.preco %}
+                              Boa
+                              <!--{{ pedido.produto.preco}}-->
+                           {% endif %}
+                           {% if pedido.preco < pedido.produto.preco|mul:0.9 %}
+                              Ruim
+                              <!--{{ pedido.produto.preco}}-->
+                           {% endif %}
+                      </td>
+
+                      <td>
+                          <a class="btn btn-warning" href="{% url 'update_pedido' pedido.pk %}">Editar</a>
+                          <a class="btn btn-danger" href="{% url 'delete_pedido' pedido.pk %}">Deletar</a>
+                      </td>
+                  </tr>
+                {% endfor %}
+             </tbody>
+         </table>
+         <a class="btn btn-info text-aling-center btn-lg" href="{% url 'abrir_pedido' %}">Criar</a>
+     </div>
+{% endblock %}
