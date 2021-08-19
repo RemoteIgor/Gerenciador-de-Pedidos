@@ -25,7 +25,7 @@ SECRET_KEY = '-bz0d1^$&r_0h!47rnd)4ly!@&93(jm&tkn5v0bojdgn+pqlc('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://gerenpedidos.herokuapp.com/ ']
 
 
 # Application definition
